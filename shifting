@@ -1,0 +1,128 @@
+Logic Shift
+shift right
+1010 1001
+shift right 3bits 
+0001 0101
+
+shift left
+1010 1001
+shift left 3bits
+0100 1000
+
+prompt db "enter the number :" ,0
+amount db "enter the amount to shift:",0
+
+mov eax,prompt
+call print_string
+call read_int
+mov ebx,eax
+
+mov eax,amount
+call print_string
+call read_int
+mov ecx,eax
+mov eax,ebx
+dump_regs 1
+shr/shl eax, cl
+dump_regs 2
+
+call print_int 
+call print_nl
+
+Arithmetic Shift[sign shift]:
+consider sign with it
+sal,sar
+double precsion shifts
+shld dest,src,count
+shrd dest,src,count
+
+variables:
+can be defined in .bss or .data
+we can allocate value in .data but not in .bss we can allocate space but not value in .bss
+since .data is prefered 
+
+
+mov eax,variable=>pointer
+mov eax,[var]=>actual value at that byte
+
+therfore 
+segment .data
+string db "Car Rocket Horse",0
+
+
+mov eax,string
+call print_string
+call print_nl
+output:
+Car Rocket Horse
+
+mov eax,string
+add eax,4
+call print_string
+call print_nl
+ouput:
+Rocket Horse[pointer+4=hence moved R]
+
+modfying the w in "hello world"
+
+hello db "Hello world",0
+
+
+mov eax,hello
+call print_string
+call print_nl
+add eax,6
+mov BYTE[eax],'W'
+mov eax,hello
+call print_string
+call print_nl
+
+
+operations 
+
+call 
+push the adres of ni onto stack
+move eip to the new functions location
+
+
+ret
+return from a function
+pop the return address of the satck
+move eip to that address
+
+sub esp,X[ subtract X from esp in order to free up the stack]
+
+add esp,X[ add  X from esp genrlly done when we leave the fnction]
+
+and esp,-1[when you are reverse enginner some i might look and,x,-1 to make sure the esp has an even boundary even boundry makes it difficult to hack this system]
+
+pushad
+  push in weired order eax,ecx,edx,ebx,original esp,ebp,esi,edi
+ popad
+  reverse of pushad
+  
+  printf:
+  variable numberof argument 
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
