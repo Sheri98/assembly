@@ -1,0 +1,131 @@
+CPU MODELS:
+
+realmode:
+by default when is powered on or reset ,can aces only 1mb,no memory protecion,no privi pos
+
+prototected:
+
+4gb,memmory pro/priv /multtasking suport virtual-8086 mode
+
+system managment mode:
+used for power managment task
+
+MEMORY MODLEs:
+
+flat model:
+linear address can access any adres directly
+
+segmented model
+segment selector + offset to access location
+
+real address mode model
+special case of segment model
+
+
+===============================================================================
+
+protected model + flat model ,2^^32=4gb,can use multithreading,pivilage levels,sreg point to segment descriptors which are gdt,ldt,idt([global,local,interupt]discriptot table)
+
+===============================================================================
+
+VIRTUAL MEMORY MODEL:
+
+|------------------|	
+| KERNEL SPACE(1GB)| 	   
+|__________________|	   	   
+| USER SPACE (3GB) |
+|	  	   |				
+|	   	   |
+|------------------|
+
+USERDATA:
+
+STACK (FUNCTION ARGS + LOCAL ARGS)
+
+SHARED LIBS + MAPPINGS 
+
+HEAP   (DYNAMIC ARGS)
+
+BSS    (UNINTILIZED DAT)
+	
+DATA    (INTILIZED DATA)
+
+TEXT	(PROGRAM)
+=================================================================================
+To see UserSpace in real life:
+
+Method 1: 
+1)ps 
+2)take pid
+3)cat /proc/pid/maps
+
+Method 2:
+1)gdb /bin/bash
+2)break main
+3)run
+4)info proc mappings
+
+Method 3:
+1)ps
+2)pmap -d pid
+
+===================================================================================
+
+
+Writing a Simple Hello World:
+
+*)to print anything its better leverage os and call system calls which helps us
+*)[ int 0x80 / SYSENTER / modern implementation using vsdo  ] are used for calling systemcalls
+*)stdout 1 stdin 0 stderror 2
+
+To Compile 32bit in 64bit:
+
+nasm -f elf64 -o filenmae.o filename.asm
+ld -s -o filenmae filename.o
+
+or
+
+dpkg --print--architecture [ to check the architecture ]
+sudo dpkg --add-architecture i386 && sudo apt-get update
+
+===================================================================================
+Fundamental Data Types:
+
+Byte-8bits
+Word-16bits
+DoubleWord-32bits
+QuadWord-64bits
+DoubleQuodWord-128bits
+
+UnSigned: 32bit for storing
+Signed:30bits data and last bit msb=signbit[+/-]
+
+====================================================================================
+NASM is case sensitive
+
+message db 0xAA,0XBB,0xCC,0xDD
+
+Declare Unintilized Data:
+buffer:  resb 64 ; reserved 64byte
+Wordvar: resw 1  ;reaserve a word
+
+Special Tokens:
+$ - evalutes to current line
+$$ - evalutes to the beginning of current section
+
+times: for reppilcation of data
+
+ZeroBuf: times 64 db 0[repeat db 0 64 times] 
+
+times 100 movsb[movsb replicated 100 times]
+
+==================================================================================
+
+
+
+
+
+
+
+
+

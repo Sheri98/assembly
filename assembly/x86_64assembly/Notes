@@ -1,0 +1,10 @@
+Commands:
+
+To check CPU architecture and other info:
+lscpu
+cat proc/cpuinfo[lm,mmx,sse2)
+
+
+
+:wq
+
